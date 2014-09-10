@@ -62,3 +62,11 @@ func (t *Token) Tokens() []*Token {
 
 	panic(ErrTokenIsValue)
 }
+
+func (t *Token) String() string {
+	if t.isValue {
+		return fmt.Sprintf("%q", t.stringValue)
+	} else {
+		return fmt.Sprintf("%v", t.tokens)
+	}
+}

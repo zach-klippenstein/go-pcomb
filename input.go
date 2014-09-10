@@ -4,13 +4,23 @@ import (
 	"fmt"
 )
 
+// Input provides text to the parser.
+// It is immutable, and mutators return new Inputs.
 type Input interface {
+	// Value returns the string value of the rest of the input
 	Value() string
+
+	// Pos returns the number of bytes that have already been consumed,
+	// or the number of bytes into the source that this input represents.
 	Pos() int
+
+	// Advance returns an Input with a greater Pos.
 	Advance(int) Input
+
 	String() string
 }
 
+// StringInput is an Input that is backed by a string.
 type StringInput struct {
 	Whole string
 	pos   int
